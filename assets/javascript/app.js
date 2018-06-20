@@ -19,7 +19,7 @@ $.ajax({
     method: "GET"
 }).then(function(response1){
     console.log(queryURL)
-
+    
     // The response will go here
 });
 
@@ -34,6 +34,7 @@ var config = {
     storageBucket: "project-happenin.appspot.com",
     messagingSenderId: "167007450235"
   };
+
   firebase.initializeApp(config);
 
   var database = firebase.database();
