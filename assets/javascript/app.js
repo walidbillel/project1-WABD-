@@ -21,4 +21,19 @@ $.ajax({
     console.log(queryURL)
 
     // The response will go here
-})
+});
+
+
+// Initializing the firebase 
+
+var config = {
+    apiKey: "AIzaSyB-8hqysBzeElEDP5mjEFa2BpJsM3W8eTk",
+    authDomain: "project-happenin.firebaseapp.com",
+    databaseURL: "https://project-happenin.firebaseio.com",
+    projectId: "project-happenin",
+    storageBucket: "project-happenin.appspot.com",
+    messagingSenderId: "167007450235"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
