@@ -2,8 +2,11 @@
 
 
 
+
+
 // creating our queryUrl variables so we can target the right API when the inputs are entered
-var locationAjax = $("#location").val().trim()
+var locationAjax = $("#location").val().trim();
+
 // .replaceSpace.replace(" ", "+");
 // console.log(locationAjax);
 var categoryAjax = $("#category").val().trim();
@@ -14,9 +17,15 @@ var dateAjax = $("#date").val().trim();
 
 var perimeterAjax = $("#within").val().trim();
 
-var queryURL = "http://api.eventful.com/json/events/search?app_key=3GWqGbZzG2zBx9Z3&l=" + locationAjax + "&c=" + categoryAjax + "&t=" + dateAjax + "&within=" + perimeterAjax + "&units=miles";
+var queryURL = "http://api.eventful.com/json/events/search?app_key=3GWqGbZzG2zBx9Z3&l=" + locationAjax ;
+//  "&c=" + categoryAjax + "&t=" + dateAjax + "&within=" + perimeterAjax + "&units=miles";
 
 // Performing the ajax request with the queryURL
+
+$("#submit").on("click", function(){
+
+event.preventDefault();
+
 
 $.ajax({
     url: queryURL,
@@ -25,10 +34,18 @@ $.ajax({
     console.log(queryURL)
     
     var results = response1.events;
+    console.log(locationAjax)
 
     console.log(results);
     // The response will go here
 });
+
+});
+
+
+
+
+
 
 
 // Initializing the firebase 
