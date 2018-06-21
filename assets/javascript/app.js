@@ -4,27 +4,29 @@
 
 
 
+
 // creating our queryUrl variables so we can target the right API when the inputs are entered
-var locationAjax = $("#location").val().trim();
+// var locationAjax = $("#location").val().trim();
+var locationAjax = "New+York";
 
 // .replaceSpace.replace(" ", "+");
-// console.log(locationAjax);
-var categoryAjax = $("#category").val().trim();
-var keywordAjax = $("#keyword").val().trim();
+console.log("should be here"+ locationAjax);
+var categoryAjax = "art";
+// var categoryAjax = $("#category").val().trim();
+// var keywordAjax = $("#keyword").val().trim();
+var keywordAjax = "art";
 // the time needs to be entered in a specific format like (This+weekend or 29+December+2018) 
 // either we need to tell the user the correct format or figure out something else
-var dateAjax = $("#date").val().trim();
+var dateAjax = "this+weekend";
 
-var perimeterAjax = $("#within").val().trim();
+// var perimeterAjax = $("#within").val().trim();
+var perimeterAjax = "10";
 
-var queryURL = "http://api.eventful.com/json/events/search?app_key=3GWqGbZzG2zBx9Z3&l=" + locationAjax ;
-//  "&c=" + categoryAjax + "&t=" + dateAjax + "&within=" + perimeterAjax + "&units=miles";
+var queryURL = "https://api.eventful.com/json/events/search?app_key=3GWqGbZzG2zBx9Z3&l=" + locationAjax + "&c=" + categoryAjax + "&q=" + keywordAjax + "&t=" + dateAjax + "&within=" + perimeterAjax + "&units=miles";
 
+console.log(queryURL);
 // Performing the ajax request with the queryURL
 
-$("#submit").on("click", function(){
-
-event.preventDefault();
 
 
 $.ajax({
@@ -33,14 +35,16 @@ $.ajax({
 }).then(function(response1){
     console.log(queryURL)
     
+    
     var results = response1.events;
-    console.log(locationAjax)
+    
 
     console.log(results);
     // The response will go here
 });
 
-});
+
+
 
 
 
