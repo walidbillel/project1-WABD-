@@ -1,3 +1,5 @@
+//Testing Header Slideshow
+
 // Building up the ajax call
 
 // creating our queryUrl variables so we can target the right API when the inputs are entered
@@ -17,7 +19,7 @@ var queryURL = "http://api.eventful.com/json/events/search?app_key=3GWqGbZzG2zBx
 $.ajax({
     url: queryURL,
     method: "GET"
-}).then(function(response1){
+}).then(function (response1) {
     console.log(queryURL)
 
     // The response will go here
@@ -33,7 +35,7 @@ var config = {
     projectId: "project-happenin",
     storageBucket: "project-happenin.appspot.com",
     messagingSenderId: "167007450235"
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
 
-  var database = firebase.database();
+var database = firebase.database();
