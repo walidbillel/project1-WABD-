@@ -51,7 +51,7 @@ $("#submit").on("click", function () {
 
     event.preventDefault();
   
-    var artistAjax = $("#category").val();
+    var artistAjax = $("#where").val();
     artistAjax = artistAjax.split(" ").join("-");
     console.log(artistAjax);
     console.log(artistAjax);
