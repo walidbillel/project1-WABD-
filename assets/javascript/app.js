@@ -27,8 +27,8 @@ $("#submit").on("click", function () {
 
 
 
-  console.log(artistAjax);
-  console.log(cityAjax);
+  // console.log(artistAjax);
+  // console.log(cityAjax);
 
   var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
 
@@ -41,7 +41,7 @@ $("#submit").on("click", function () {
     url: queryURL,
     method: "GET"
   }).then(function (response1) {
-    console.log(queryURL);
+    // console.log(queryURL);
     $("#results").empty();
 
     var results = response1.events;
@@ -55,7 +55,7 @@ $("#submit").on("click", function () {
       ourDiv.append(title, "<hr>");
 
       var image = $("<img>");
-      console.log(results[i].performers[0].image);
+      // console.log(results[i].performers[0].image);
       image.attr("src", results[i].performers[0].image);
       // console.log(image);
       ourDiv.append(image);
@@ -94,6 +94,66 @@ $("#submit").on("click", function () {
 });
 
 
+
+$("#submit-direction").on("click", function () {
+
+  event.preventDefault();
+
+  var currentLocaAjax2 = $("#current-location").val();
+  currentLocaAjax2 = currentLocaAjax2.split(" ").join("+");
+  console.log(currentLocaAjax2);
+
+  var destinationAjax2 = $("#destination").val();
+  destinationAjax2 = destinationAjax2.split(" ").join("+");
+  console.log(destinationAjax2);
+
+
+
+
+
+  queryURL = "http://www.mapquestapi.com/directions/v2/route?key=DZcQ6A8PzsQFGMHAqxissAvWHreJTluG&from=" + currentLocaAjax2 + "&to=" + destinationAjax2 + "&enhancedNarrative=true"
+
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function (response2) {
+    console.log(queryURL);
+    $("#results").empty();
+
+    var results = response2.route;
+
+
+    var totalDistance = results.distance + " miles";
+
+    console.log("Total Distance is: " + totalDistance);
+    $("#direction-result").append("test");
+
+    var maneuversDir = results.legs[0].maneuvers;
+    // console.log(maneuversDir);
+
+    for (var i = 0; i < maneuversDir.length; i++) {
+
+
+      var narrativeDir = maneuversDir[i].narrative;
+      // console.log(narrativeDir)
+      var narrDistance = maneuversDir[i].distance;
+
+
+      step = narrativeDir + " For " + narrDistance + " miles, then =>";
+      console.log(step)
+
+
+      $("#direction-result").append(step);
+
+
+      // console.log(maneuversDir[i].narrative);
+      // console.log(maneuversDir[i].distance);
+    }
+
+
+  });
+
+});
 
 
 
@@ -142,10 +202,10 @@ $("#submit").on("click", function (event) {
   //Uploads to database
   database.ref().push(userInput);
 
-  console.log(userInput.artist);
-  console.log(userInput.where);
-  console.log(userInput.when);
-  console.log(userInput.keywords);
+  // console.log(userInput.artist);
+  // console.log(userInput.where);
+  // console.log(userInput.when);
+  // console.log(userInput.keywords);
 
   // Clears all of the text-boxes
   $("#where").val("");
@@ -158,7 +218,7 @@ $("#submit").on("click", function (event) {
 
 database.ref().on("child_added", function (childSnapshot) {
   //console.log(childSnapshot.val().locFirebase);
-  console.log(childSnapshot.val());
+  // console.log(childSnapshot.val());
 
   // Store everything into a variable
 
@@ -167,10 +227,10 @@ database.ref().on("child_added", function (childSnapshot) {
   var performersFirebase = childSnapshot.val().artist;
   var keywordsFirebase = childSnapshot.val().keywords;
 
-  console.log(whereFirebase);
-  console.log(whenFirebase);
-  console.log(performersFirebase);
-  console.log(keywordsFirebase);
+  // console.log(whereFirebase);
+  // console.log(whenFirebase);
+  // console.log(performersFirebase);
+  // console.log(keywordsFirebase);
 
   // Handle the errors
 }, function (errorObject) {
