@@ -5,57 +5,32 @@
 
 
 
-
-
-// creating our queryUrl variables so we can target the right API when the inputs are entered
-// // var locationAjax = $("#location").val().trim();
-// var locationAjax = "New+York";
-
-// // .replaceSpace.replace(" ", "+");
-// console.log("should be here"+ locationAjax);
-// var categoryAjax = "art";
-// // var categoryAjax = $("#category").val().trim();
-// // var keywordAjax = $("#keyword").val().trim();
-// var keywordAjax = "art";
-// // the time needs to be entered in a specific format like (This+weekend or 29+December+2018) 
-// // either we need to tell the user the correct format or figure out something else
-// var dateAjax = "this+weekend";
-
-// // var perimeterAjax = $("#within").val().trim();
-// var perimeterAjax = "10";
-
-// var queryURL = "https://api.eventful.com/json/events/search?app_key=3GWqGbZzG2zBx9Z3&l=" + locationAjax + "&c=" + categoryAjax + "&q=" + keywordAjax + "&t=" + dateAjax + "&within=" + perimeterAjax + "&units=miles";
-
-// console.log(queryURL);
-// // Performing the ajax request with the queryURL
-
-
-
-// $.ajax({
-//     url: queryURL,
-//     method: "GET"
-// }).then(function (response1) {
-//     console.log(queryURL)
-    
-    
-//     var results = response1.events;
-    
-
-//     console.log(results);
-//     // The response will go here
-// });
-
-
-
 $("#submit").on("click", function () {
 
     event.preventDefault();
   
-    var artistAjax = $("#where").val();
+    var artistAjax = $("#performers").val();
     artistAjax = artistAjax.split(" ").join("-");
+    artistAjax = artistAjax.toLowerCase();
+
+    var cityAjax = $("#where").val();
+    cityAjax = cityAjax.split(" ").join("-");
+    cityAjax = cityAjax.toLowerCase();
+
+    // var dateAjax = $("#when").val();
+
+    var keywordAjax = $("#keywords").val();
+    keywordAjax = keywordAjax.split(" ").join("-");
+    keywordAjax = keywordAjax.toLowerCase();
+    
+
+
+
+
     console.log(artistAjax);
-    console.log(artistAjax);
-    var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
+    console.log(cityAjax);
+    
+    var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax +  "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
   
     // console.log(queryURL);
     // Performing the ajax request with the queryURL
@@ -112,11 +87,52 @@ $("#submit").on("click", function () {
         
         $("#results").append(ourDiv);
       }
-      // The response will go here
+      
     
     }); 
   
   });
+
+
+
+//  $("#submit").on("click", function () {
+
+//     event.preventDefault();
+
+//     var whereEvent = $("#where").val();
+//     var whereEvent = $("#where").val();
+//     var whereEvent = $("#where").val();
+//     var whereEvent = $("#where").val();
+//     var whereEvent = $("#where").val();
+
+//     var queryURL = "https://api.meetup.com/2/events?key=16351e665c576a156b307a6f5b2e6f35&group_urlname=ny-tech&sign=true";
+
+
+//  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
