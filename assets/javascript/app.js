@@ -126,7 +126,7 @@ $("#submit-direction").on("click", function () {
     var totalDistance = results.distance + " miles";
 
     console.log("Total Distance is: " + totalDistance);
-    $("#direction-result").append("test");
+    $("#direction-result").append("Total Distance: " + totalDistance);
 
     var maneuversDir = results.legs[0].maneuvers;
     // console.log(maneuversDir);
