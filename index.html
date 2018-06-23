@@ -6,10 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Happenin!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
+
+    <!--Google Fonts CSS-->
     <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
+
+    <!--Stylesheet-->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+
+    <!--PickDate CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/default.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/default.date.css">
 
 </head>
 
@@ -63,8 +72,8 @@
                         </div>
                         <div class="form-group">
                             <label for="when">When</label>
-                            <input type="text" class="form-control" id="when" placeholder="YYYY-MM-DD">
-                            <small class="form-text text-muted">Enter date in this format (YYYY/MM/DD)</small>
+                            <input type="text" class="form-control datepicker" id="when" placeholder="Pick a Date">
+                            <small class="form-text text-muted">Pick a date</small>
 
                         </div>
                         <div class="form-group">
@@ -121,38 +130,43 @@
                                 </div>
                                 <button type="submit" id="submit-direction" class="btn btn-primary">Submit</button>
                             </form>
-
                             <div id="direction-result">
-
-                                </div>
-
                             </div>
 
                         </div>
-
                     </div>
+                    <!--ends card-body-->
                 </div>
-                <!--ends card-body-->
+                <!--ends card-->
             </div>
-            <!--ends card-->
+            <!--ends col-sm-4-->
         </div>
-        <!--ends col-sm-4-->
-    </div>
-    <!--ends row-->
+        <!--ends row-->
 
-    <!--Starts footer-->
-    <footer id="footer" class="text-center text-muted">
-        &copy; Happenin' 2018 - Walid Boubguira, Brian Lopes, Ana Marte
-    </footer>
-    <!--Footer Ends-->
+        <!--Starts footer-->
+        <footer id="footer" class="text-center text-muted">
+            &copy; Happenin' 2018 - Walid Boubguira, Brian Lopes, Ana Marte
+        </footer>
+        <!--Footer Ends-->
 </body>
+<!--JQuery-->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
     crossorigin="anonymous"></script>
+
+<!--Moment JS-->
 <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+<!--Firebase JS-->
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+
+<!--Pick Date JS-->
+<script src="assets/javascript/picker.js"></script>
+<script src="assets/javascript/picker.date.js"></script>
+
+<!--Our JS-->
 <script src="assets/javascript/app.js"></script>
 
 </html>

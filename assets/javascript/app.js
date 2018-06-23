@@ -155,6 +155,9 @@ $("#submit-direction").on("click", function () {
 
 });
 
+// -----------------------------------------------------------
+// DatePicker
+$('.datepicker').pickadate();
 
 
 
