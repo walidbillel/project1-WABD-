@@ -17,7 +17,7 @@ $("#submit").on("click", function () {
     cityAjax = cityAjax.split(" ").join("-");
     cityAjax = cityAjax.toLowerCase();
 
-    // var dateAjax = $("#when").val();
+    var dateAjax = $("#when").val();
 
     var keywordAjax = $("#keywords").val();
     keywordAjax = keywordAjax.split(" ").join("-");
@@ -30,7 +30,7 @@ $("#submit").on("click", function () {
     console.log(artistAjax);
     console.log(cityAjax);
     
-    var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax +  "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
+    var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_utc=" + dateAjax +  "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
   
     // console.log(queryURL);
     // Performing the ajax request with the queryURL
@@ -95,20 +95,9 @@ $("#submit").on("click", function () {
 
 
 
-//  $("#submit").on("click", function () {
-
-//     event.preventDefault();
-
-//     var whereEvent = $("#where").val();
-//     var whereEvent = $("#where").val();
-//     var whereEvent = $("#where").val();
-//     var whereEvent = $("#where").val();
-//     var whereEvent = $("#where").val();
-
-//     var queryURL = "https://api.meetup.com/2/events?key=16351e665c576a156b307a6f5b2e6f35&group_urlname=ny-tech&sign=true";
 
 
-//  });
+
 
 
 
