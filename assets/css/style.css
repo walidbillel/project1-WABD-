@@ -40,6 +40,12 @@ body{
     color: #FF0AC2
 }
 
+/* Results Div*/
+#results{
+    overflow: auto;
+    height: 430px;
+}
+
 /*Card Color*/
 #cardColor{
     background:#e7d2ac;
