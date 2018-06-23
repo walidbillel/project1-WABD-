@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Happenin!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+<<<<<<< HEAD
    
 </head>
 <body>
@@ -60,15 +64,106 @@
 
 
 
+=======
+>>>>>>> Ana-Marte
 
+</head>
 
+<body>
+    <!--This is the carousel header-->
+    <header>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide One - Set the background image for this slide in the line below -->
+                <div class="carousel-item active" style="background-image: url('assets/images/headerimg1.jpg')">
+                    <h1 class="display-1 text-center" id="titleText">HAPPENIN'</h1>
 
+                </div>
+                <!-- Slide Two - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('assets/images/headerimg2.jpg')">
+                    <h1 class="display-1 text-center" id="titleText">HAPPENIN'</h1>
+                </div>
+                <!-- Slide Three - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('assets/images/headerimg3.jpg')">
+                    <h1 class="display-1 text-center" id="titleText">HAPPENIN'</h1>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </header>
+    <!--Ends Carousel Header-->
 
+    <!--Starts Search Event Card & Result Card-->
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card mt-3 ml-5" id="cardColor">
+                <div class="card-body">
+                    <h5 class="card-title">Search Event</h5>
+                    <form>
+                        <div class="form-group">
+                            <label for="where">Location</label>
+                            <input type="text" class="form-control" id="where" placeholder="San Diego, CA">
+                        </div>
+                        <div class="form-group">
+                            <label for="when">When</label>
+                            <input type="text" class="form-control" id="when" placeholder="October 2018">
+                        </div>
+                        <div class="form-group">
+                            <label for="categories">Category</label>
+                            <input type="text" class="form-control" id="categories" placeholder="Music, Art, Video Gaming, Etc">
+                        </div>
+                        <div class="form-group">
+                            <label for="keywords">Keywords</label>
+                            <input type="text" class="form-control" id="keywords" placeholder="Bruno Mars">
+                        </div>
+                        <div class="form-group">
+                            <label for="within">Within (miles):</label>
+                            <input type="text" class="form-control" id="within" placeholder="10 miles">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <!--Ends Form-->
 
+                </div>
+                <!--Ends card-body-->
+            </div>
+            <!--ends card-->
+        </div>
+        <!--ends col-sm-4-->
 
+        <div class="col-sm-6">
+            <div class="card mt-3 ml-5" id="cardColor">
+                <div class="card-body">
+                    <h5 class="card-title" id="results">Results</h5>
+                    <div class="card-text">
 
+                    </div>
+                </div>
+                <!--ends card-body-->
+            </div>
+            <!--ends card-->
+        </div>
+        <!--ends col-sm-6-->
+    </div>
+    <!--ends row-->
 
-    
+    <!--Starts footer-->
+    <footer id="footer">
+        &copy; Happenin' 2018 - Walid Boubguira, Brian Lopes, Ana Marte
+    </footer>
+    <!--Footer Ends-->
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -77,8 +172,12 @@
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<<<<<<< HEAD
 <script src="assets/javascript/app.js"></script> 
 
 
+=======
+<script src="assets/javascript/app.js"></script>
+>>>>>>> Ana-Marte
 
 </html>

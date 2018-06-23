@@ -1,3 +1,5 @@
+//Testing Header Slideshow
+
 // Building up the ajax call
 
 
@@ -32,7 +34,7 @@ console.log(queryURL);
 $.ajax({
     url: queryURL,
     method: "GET"
-}).then(function(response1){
+}).then(function (response1) {
     console.log(queryURL)
     
     
@@ -54,6 +56,7 @@ $.ajax({
 
 // Initializing the firebase 
 
+<<<<<<< HEAD
 // var config = {
 //     apiKey: "AIzaSyB-8hqysBzeElEDP5mjEFa2BpJsM3W8eTk",
 //     authDomain: "project-happenin.firebaseapp.com",
@@ -67,3 +70,16 @@ $.ajax({
 
 //   var database = firebase.database();
 
+=======
+var config = {
+    apiKey: "AIzaSyB-8hqysBzeElEDP5mjEFa2BpJsM3W8eTk",
+    authDomain: "project-happenin.firebaseapp.com",
+    databaseURL: "https://project-happenin.firebaseio.com",
+    projectId: "project-happenin",
+    storageBucket: "project-happenin.appspot.com",
+    messagingSenderId: "167007450235"
+};
+firebase.initializeApp(config);
+
+var database = firebase.database();
+>>>>>>> Ana-Marte
