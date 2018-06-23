@@ -95,20 +95,9 @@ $("#submit").on("click", function () {
 
 
 
-//  $("#submit").on("click", function () {
-
-//     event.preventDefault();
-
-//     var whereEvent = $("#where").val();
-//     var whereEvent = $("#where").val();
-//     var whereEvent = $("#where").val();
-//     var whereEvent = $("#where").val();
-//     var whereEvent = $("#where").val();
-
-//     var queryURL = "https://api.meetup.com/2/events?key=16351e665c576a156b307a6f5b2e6f35&group_urlname=ny-tech&sign=true";
 
 
-//  });
+
 
 // ------------------------------------------------------------
 
