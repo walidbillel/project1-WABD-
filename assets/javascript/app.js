@@ -5,7 +5,8 @@
 // Event Handler for the first API that pulls the events when clicking the submit button
 $("#submit").on("click", function () {
 
-
+  $(".resultShow").show();
+  $(".directionShow").show();
   event.preventDefault();
 
   // Creating a variable that holds the performers and then get the value entered
@@ -22,6 +23,7 @@ $("#submit").on("click", function () {
   cityAjax = cityAjax.toLowerCase();
 
   // var dateAjax = $("#when").val();
+  // dateAjax = dateAjax.split(" ").join("-");
 
   // Creating a variable that holds the wordkey and then get the value enetered
   var keywordAjax = $("#keywords").val();
@@ -37,7 +39,7 @@ $("#submit").on("click", function () {
 
 
   // Creating the callback queryURL based on the parameters eneterd
-  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
+  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax  + "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
 
   // console.log(queryURL);
   // Performing the ajax request with the queryURL
@@ -62,8 +64,8 @@ $("#submit").on("click", function () {
       var ourDiv = $("<div>");
 
       // Getting the title from the ajax call then append it to the results
-      var title = $("<h3>");
-      title.append(results[i].title);
+      var title = $("<p>");
+      title.append("<b>Event Name: </b>" + results[i].title);
       ourDiv.append(title, "<hr>");
 
       // getting the image from the call and appending it to the results
@@ -95,6 +97,7 @@ $("#submit").on("click", function () {
       pricesRange.append("average Price: $" + results[i].stats.average_price, "<br>");
       pricesRange.append("highest Price: $" + results[i].stats.highest_price);
       ourDiv.append(pricesRange);
+      
 
       // getting the ticket url and appending it to the results as an embeded link in a text
       var ticketUrl = $("<p>");
@@ -161,14 +164,28 @@ $("#submit-direction").on("click", function () {
     // looping over the array and getting information
     for (var i = 0; i < maneuversDir.length; i++) {
 
+      if (i > maneuversDir.length) {
+        var narrativeDirection = $("<li>");
+        var narrativeDistance = maneuversDir[i].distance;
+        // Appending our directions to the results (on webpage)
+        narrativeDirection.append(maneuversDir[i].narrative + "<hr>"); 
+        $("#direction-result").append(narrativeDirection);
+      } else {
+        var narrativeDirection = $("<li>");
+        var narrativeDistance = maneuversDir[i].distance;
+        // Appending our directions to the results (on webpage)
+        narrativeDirection.append(maneuversDir[i].narrative + " for: " + narrativeDistance + " Miles. " + "<hr>");
+        $("#direction-result").append(narrativeDirection);
+      }
+
       // create a list that will hold the directions
-      var narrativeDirection = $("<li>");
-      var narrativeDistance = maneuversDir[i].distance;
+      // var narrativeDirection = $("<li>");
+      // var narrativeDistance = maneuversDir[i].distance;
 
 
-      // Appending our directions to the results (on webpage)
-      narrativeDirection.append(maneuversDir[i].narrative + " for: " + narrativeDistance + " Miles. " + "<hr>");
-      $("#direction-result").append(narrativeDirection);
+      // // Appending our directions to the results (on webpage)
+      // narrativeDirection.append(maneuversDir[i].narrative + " for: " + narrativeDistance + " Miles. " + "<hr>");
+      // $("#direction-result").append(narrativeDirection);
 
     }
 
