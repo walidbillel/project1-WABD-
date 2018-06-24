@@ -43,7 +43,12 @@ body{
 /* Results Div*/
 #results{
     overflow: auto;
-    height: 430px;
+    height: 382px;
+}
+
+#direction-result {
+    overflow: auto;
+    height: 139px;
 }
 
 /*Card Color*/

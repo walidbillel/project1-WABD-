@@ -48,7 +48,7 @@ $("#submit").on("click", function () {
     url: queryURL,
     method: "GET"
   }).then(function (response1) {
-    // console.log(queryURL);
+    console.log(queryURL);
     // empty the result so each time it loads with new results and not putting them over each other
     $("#results").empty();
 
@@ -214,6 +214,8 @@ $("#submit").on("click", function (event) {
   var whenFirebase = $("#when").val().trim();
   var performersFirebase = $("#performers").val().trim();
   var keywordsFirebase = $("#keywords").val().trim();
+  var currentLocationFirebase = $("#current-location").val().trim();
+  var destinationFirebase = $("#destination").val().trim();
 
   // Creates local temp object
 
@@ -221,7 +223,9 @@ $("#submit").on("click", function (event) {
     artist: performersFirebase,
     where: whereFirebase,
     when: whenFirebase,
-    keywords: keywordsFirebase
+    keywords: keywordsFirebase,
+    currentLocation: currentLocationFirebase,
+    destination: destinationFirebase
   };
 
   //Uploads to database
@@ -237,6 +241,8 @@ $("#submit").on("click", function (event) {
   $("#when").val("");
   $("#performers").val("");
   $("#keywords").val("");
+  $("#current-location").val("");
+  $("#destination").val();
 });
 
 //Firebase watcher + initial loader
@@ -251,6 +257,8 @@ database.ref().on("child_added", function (childSnapshot) {
   var whenFirebase = childSnapshot.val().when;
   var performersFirebase = childSnapshot.val().artist;
   var keywordsFirebase = childSnapshot.val().keywords;
+  var currentLocationFirebase = childSnapshot.val().currentLocation;
+  var destinationFirebase = childSnapshot.val().destination;
 
   // console.log(whereFirebase);
   // console.log(whenFirebase);
