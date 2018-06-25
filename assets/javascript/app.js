@@ -5,8 +5,9 @@
 // Event Handler for the first API that pulls the events when clicking the submit button
 $("#submit").on("click", function () {
 
-  $(".resultShow").show();
-  $(".directionShow").show();
+  // show the results divs when clicking on the sumbit buttons
+  // $(".resultShow").show();
+  // $(".directionShow").show();
   event.preventDefault();
 
   // Creating a variable that holds the performers and then get the value entered
@@ -30,22 +31,17 @@ $("#submit").on("click", function () {
   keywordAjax = keywordAjax.toLowerCase();
 
 
-  // this is the date that need to be added to the ajax call
+  // Creating a variable that holds the datetime and get the value entered for the ajax call
   var datePicked = $("#when").val();
-  
-  console.log(datePicked);
-  
-  
-  // var datePickedAjax = moment(datePicked, "MMMM DD, YYYY").format("YYYY-MM-DD");
-  
+  datePicked = (moment(datePicked).format("YYYY[-]MM[-]DD"));
 
+  // console.log(dateFixed);
+
+  // console.log(datePicked);
 
 
   // Creating the callback queryURL based on the parameters eneterd
-  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
-
-  // console.log(queryURL);
-  // Performing the ajax request with the queryURL
+  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_utc=" + datePicked + "T19:00:00&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
 
 
   // Creating the Ajax call for the first API seatgeek
@@ -110,7 +106,6 @@ $("#submit").on("click", function () {
       // showing our results on the page
       $("#results").append(ourDiv);
     }
-
 
   });
 
@@ -180,42 +175,16 @@ $("#submit-direction").on("click", function () {
         narrativeDirection.append(maneuversDir[i].narrative + " for: " + narrativeDistance + " Miles. " + "<hr>");
         $("#direction-result").append(narrativeDirection);
       }
-
-      // create a list that will hold the directions
-      // var narrativeDirection = $("<li>");
-      // var narrativeDistance = maneuversDir[i].distance;
-
-
-      // // Appending our directions to the results (on webpage)
-      // narrativeDirection.append(maneuversDir[i].narrative + " for: " + narrativeDistance + " Miles. " + "<hr>");
-      // $("#direction-result").append(narrativeDirection);
-
     }
-
 
   });
 
 });
 
+
 // -----------------------------------------------------------
 // DatePicker
-// $('.datepicker').pickadate();
-
-
 $(".datepicker").pickadate();
-
-
-
-
-
-
-
-// console.log(datePicked);
-
-
-
-
-
 // ------------------------------------------------------------
 
 
