@@ -41,7 +41,7 @@ $("#submit").on("click", function () {
 
 
   // Creating the callback queryURL based on the parameters eneterd
-  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_utc=" + datePicked + "T19:00:00&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
+  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_local=" + datePicked + "T19:00:00&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
 
 
   // Creating the Ajax call for the first API seatgeek
