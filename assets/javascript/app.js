@@ -22,8 +22,7 @@ $("#submit").on("click", function () {
   // changing it to lower case
   cityAjax = cityAjax.toLowerCase();
 
-  // var dateAjax = $("#when").val();
-  // dateAjax = dateAjax.split(" ").join("-");
+
 
   // Creating a variable that holds the wordkey and then get the value enetered
   var keywordAjax = $("#keywords").val();
@@ -31,15 +30,19 @@ $("#submit").on("click", function () {
   keywordAjax = keywordAjax.toLowerCase();
 
 
+  // this is the date that need to be added to the ajax call
+  var datePicked = $("#when").val();
+  
+  console.log(datePicked);
+  
+  
+  // var datePickedAjax = moment(datePicked, "MMMM DD, YYYY").format("YYYY-MM-DD");
+  
 
-
-
-  // console.log(artistAjax);
-  // console.log(cityAjax);
 
 
   // Creating the callback queryURL based on the parameters eneterd
-  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax  + "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
+  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
 
   // console.log(queryURL);
   // Performing the ajax request with the queryURL
@@ -97,7 +100,7 @@ $("#submit").on("click", function () {
       pricesRange.append("average Price: $" + results[i].stats.average_price, "<br>");
       pricesRange.append("highest Price: $" + results[i].stats.highest_price);
       ourDiv.append(pricesRange);
-      
+
 
       // getting the ticket url and appending it to the results as an embeded link in a text
       var ticketUrl = $("<p>");
@@ -168,7 +171,7 @@ $("#submit-direction").on("click", function () {
         var narrativeDirection = $("<li>");
         var narrativeDistance = maneuversDir[i].distance;
         // Appending our directions to the results (on webpage)
-        narrativeDirection.append(maneuversDir[i].narrative + "<hr>"); 
+        narrativeDirection.append(maneuversDir[i].narrative + "<hr>");
         $("#direction-result").append(narrativeDirection);
       } else {
         var narrativeDirection = $("<li>");
@@ -196,7 +199,19 @@ $("#submit-direction").on("click", function () {
 
 // -----------------------------------------------------------
 // DatePicker
-$('.datepicker').pickadate();
+// $('.datepicker').pickadate();
+
+
+$(".datepicker").pickadate();
+
+
+
+
+
+
+
+// console.log(datePicked);
+
 
 
 
