@@ -160,20 +160,22 @@ $("#submit-direction").on("click", function () {
     // console.log(maneuversDir);
 
     // looping over the array and getting information
-    for (var i = 0; i < maneuversDir.length; i++) {
-
-      if (i > maneuversDir.length) {
+    for (var i = 0; i <= maneuversDir.length - 1; i++) {
+     
+      if (i == maneuversDir.length - 1) {
         var narrativeDirection = $("<li>");
         var narrativeDistance = maneuversDir[i].distance;
         // Appending our directions to the results (on webpage)
-        narrativeDirection.append(maneuversDir[i].narrative + "<hr>");
+        narrativeDirection.append(maneuversDir[i].narrative);
         $("#direction-result").append(narrativeDirection);
-      } else {
+      } else if (i < maneuversDir.length - 1) {
         var narrativeDirection = $("<li>");
         var narrativeDistance = maneuversDir[i].distance;
         // Appending our directions to the results (on webpage)
         narrativeDirection.append(maneuversDir[i].narrative + " for: " + narrativeDistance + " Miles. " + "<hr>");
+        
         $("#direction-result").append(narrativeDirection);
+
       }
     }
 
