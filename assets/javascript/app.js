@@ -5,14 +5,13 @@
 // Event Handler for the first API that pulls the events when clicking the submit button
 $("#submit").on("click", function () {
 
-  
 
-  $("input").addClass("animated jackInTheBox").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+  // using the Animate lib to do some fun stuff
+  $(".eventAnime").addClass("animated jackInTheBox").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
     $(this).removeClass("animated jackInTheBox");
   });
-  // show the results divs when clicking on the sumbit buttons
-  // $(".resultShow").show();
-  // $(".directionShow").show();
+
+
   event.preventDefault();
 
   // Creating a variable that holds the performers and then get the value entered
@@ -42,14 +41,14 @@ $("#submit").on("click", function () {
   console.log(datePicked);
 
 
-   // Creating a variable that holds the timepicked and get the value entered for the ajax call
+  // Creating a variable that holds the timepicked and get the value entered for the ajax call
   var timePicked = $("#time").val();
   timePicked = moment(timePicked, "h:mm A").format("HH:mm");
   console.log(timePicked);
 
 
   // Creating the callback queryURL based on the parameters eneterd
-  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_local=" + datePicked + "T" + timePicked +"&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42&per_page=500";
+  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_local=" + datePicked + "T" + timePicked + "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42&per_page=500";
 
 
   // Creating the Ajax call for the first API (seatgeek)
@@ -96,7 +95,7 @@ $("#submit").on("click", function () {
       var dateAndTime = $("<p>");
       dateAndTime.append("<hr>", "<b>Date & Time: </b>" + results[i].datetime_local);
       ourDiv.append(dateAndTime);
-      
+
 
       // getting the venue name and appending it to the results
       var venueName = $("<p>");
@@ -109,7 +108,7 @@ $("#submit").on("click", function () {
 
       // getting the prices and appending them to the results
       var pricesRange = $("<h6>");
-      if (results[i].stats.lowest_price == null && results[i].stats.average_price == null , results[i].stats.lowest_price === null ) {
+      if (results[i].stats.lowest_price == null && results[i].stats.average_price == null, results[i].stats.lowest_price === null) {
         ourDiv.append(" <b> Prices are unavailable! </b>", "<hr>");
       } else {
         pricesRange.append("Lowest Price: $" + results[i].stats.lowest_price, "<br>");
@@ -123,22 +122,22 @@ $("#submit").on("click", function () {
       // getting the ticket url and appending it to the results as an embeded link in a text
       var ticketUrl = $("<p>");
       ticketUrl.append("<a href=" + "'" + results[i].url + "'" + ">" + "<b> Get Your Ticket Now! </b>" + "</a>", "<hr>");
-      // ticketUrl.addClass("animated");
-      // ticketUrl.addClass("bounce");
-      
       ourDiv.append(ticketUrl);
 
       // showing our results on the page
       $("#results").append(ourDiv);
     }
-
   });
-
 });
 
 
 // Event Handler for the second API that pulls the directions when clicking the submit button
 $("#submit-direction").on("click", function () {
+
+  // using the Animate lib to do some fun stuff
+  $(".directionAnime").addClass("animated rubberBand").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+    $(this).removeClass("animated rubberBand");
+  });
 
   event.preventDefault();
 
@@ -146,15 +145,11 @@ $("#submit-direction").on("click", function () {
   var currentLocaAjax2 = $("#current-location").val();
   // replacing spaces with "+" so the ajax call works proprely
   currentLocaAjax2 = currentLocaAjax2.split(" ").join("+");
-  // Event Handler for the first API that pulls the events when clicking the submit button
-  console.log(currentLocaAjax2);
-
+ 
   // creating a variable that holds the destination then getting the value enetered
   var destinationAjax2 = $("#destination").val();
   destinationAjax2 = destinationAjax2.split(" ").join("+");
-  console.log(destinationAjax2);
-
-
+  // console.log(destinationAjax2);
 
 
   //  Creating the second callback queryURL from mapquest based on the parameters eneterd
@@ -187,25 +182,22 @@ $("#submit-direction").on("click", function () {
     // looping over the array and getting information
     for (var i = 0; i <= maneuversDir.length - 1; i++) {
 
+      // if we are in the last maneuver we print without miles and append to our results
       if (i == maneuversDir.length - 1) {
         var narrativeDirection = $("<li>");
         var narrativeDistance = maneuversDir[i].distance;
-        // Appending our directions to the results (on webpage)
         narrativeDirection.append(maneuversDir[i].narrative);
         $("#direction-result").append(narrativeDirection);
+
+        // else we append results with each maneuver's miles
       } else if (i < maneuversDir.length - 1) {
         var narrativeDirection = $("<li>");
         var narrativeDistance = maneuversDir[i].distance;
-        // Appending our directions to the results (on webpage)
         narrativeDirection.append(maneuversDir[i].narrative + " for: " + narrativeDistance + " Miles. " + "<hr>");
-
         $("#direction-result").append(narrativeDirection);
-
       }
     }
-
   });
-
 });
 
 
@@ -242,7 +234,6 @@ $("#submit-direction").on("click", function (event) {
   var destinationFirebase = $("#destination").val().trim();
 
   // Creates local temp object
-
   var userLocationInput = {
     currentLocation: currentLocationFirebase,
     destination: destinationFirebase
