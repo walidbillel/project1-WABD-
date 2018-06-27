@@ -36,19 +36,19 @@ $("#submit").on("click", function () {
 
 
   // Creating a variable that holds the datetime and get the value entered for the ajax call
-  var datePicked = $("#when").val();
-  datePicked = moment(datePicked).format("YYYY[-]MM[-]DD");
-  // console.log(datePicked);
+  // var datePicked = $("#when").val();
+  // datePicked = moment(datePicked).format("YYYY[-]MM[-]DD");
+  // // console.log(datePicked);
 
 
-  // Creating a variable that holds the timepicked and get the value entered for the ajax call
-  var timePicked = $("#time").val();
-  timePicked = moment(timePicked, "h:mm A").format("HH:mm");
-  // console.log(timePicked);
+  // // Creating a variable that holds the timepicked and get the value entered for the ajax call
+  // var timePicked = $("#time").val();
+  // timePicked = moment(timePicked, "h:mm A").format("HH:mm");
+  // // console.log(timePicked);
 
 
   // Creating the callback queryURL based on the parameters eneterd
-  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_local=" + datePicked + "T" + timePicked + "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42&per_page=1000";
+  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42&per_page=1000";
 
 
   // Creating the Ajax call for the first API (seatgeek)
