@@ -19,6 +19,7 @@
     <!--PickDate CSS-->
     <link rel="stylesheet" type="text/css" href="assets/css/default.css">
     <link rel="stylesheet" type="text/css" href="assets/css/default.date.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/default.time.css">
 
 </head>
 
@@ -68,14 +69,24 @@
                         <div class="form-group">
                             <label for="where">Location</label>
                             <input type="text" class="form-control" id="where" placeholder="Enter City">
-                           
+
                         </div>
                         <div class="form-group">
-                            <label for="when">When <span id="required">*</span></label>
+                            <label for="when">Date
+                                <span id="required">*</span>
+                            </label>
                             <input type="text" class="form-control datepicker" id="when" placeholder="Pick a Date">
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="time">Time <span id="required">*</span></label>
+                            <input type="text" class="form-control timepicker" id="time" placeholder="Pick a Time">
                            
 
                         </div>
+
                         <div class="form-group">
                             <label for="performers">Look Up Specific Performers</label>
                             <input type="text" class="form-control" id="performers" placeholder="Performers">
@@ -163,9 +174,11 @@
 <!--Firebase JS-->
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 
-<!--Pick Date JS-->
+<!--Pick Date & Time JS-->
 <script src="assets/javascript/picker.js"></script>
+<script src="assets/javascript/picker-time.js"></script>
 <script src="assets/javascript/picker.date.js"></script>
+
 
 <!--Our JS-->
 <script src="assets/javascript/app.js"></script>

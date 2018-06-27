@@ -35,16 +35,14 @@ $("#submit").on("click", function () {
   var datePicked = $("#when").val();
   datePicked = (moment(datePicked).format("YYYY[-]MM[-]DD"));
 
-  // console.log(dateFixed);
-
-  // console.log(datePicked);
-
+  var timePicker = $("#time").val();
+  console.log(timePicker);
 
   // Creating the callback queryURL based on the parameters eneterd
-  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_local=" + datePicked + "T19:00:00&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42";
+  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_local=" + datePicked + "T19:00:00&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42&per_page=25";
 
 
-  // Creating the Ajax call for the first API seatgeek
+  // Creating the Ajax call for the first API (seatgeek)
   $.ajax({
     url: queryURL,
     method: "GET"
@@ -64,8 +62,17 @@ $("#submit").on("click", function () {
 
       // Getting the title from the ajax call then append it to the results
       var title = $("<p>");
-      title.append("<b>Event Name: </b>" + results[i].title);
+      title.append("<b> Event Name: </b>" + results[i].title);
+      title.css("background-color", "blue");
+      title.css("padding", "15px");
+      title.css("color", "white");
+
       ourDiv.append(title, "<hr>");
+
+      // Creating a type var and getting the results from the ajax call
+      var type = $("<p>");
+      type.append("<b>Event Type: </b>" + results[i].type);
+      ourDiv.append(type);
 
       // getting the image from the call and appending it to the results
       var image = $("<img>");
@@ -79,7 +86,7 @@ $("#submit").on("click", function () {
       var dateAndTime = $("<p>");
       dateAndTime.append("<hr>", "<b>Date & Time: </b>" + results[i].datetime_local);
       ourDiv.append(dateAndTime);
-
+      
 
       // getting the venue name and appending it to the results
       var venueName = $("<p>");
@@ -91,11 +98,16 @@ $("#submit").on("click", function () {
       ourDiv.append(venueAddress);
 
       // getting the prices and appending them to the results
-      var pricesRange = $("<p>");
-      pricesRange.append("Lowest Price: $" + results[i].stats.lowest_price, "<br>");
-      pricesRange.append("average Price: $" + results[i].stats.average_price, "<br>");
-      pricesRange.append("highest Price: $" + results[i].stats.highest_price);
-      ourDiv.append(pricesRange);
+      var pricesRange = $("<h6>");
+      if (results[i].stats.lowest_price == null && results[i].stats.average_price == null , results[i].stats.lowest_price === null ) {
+        ourDiv.append(" <b> Prices are not available! Go to the link below to check availabilities </b>", "<hr>");
+      } else {
+        pricesRange.append("Lowest Price: $" + results[i].stats.lowest_price, "<br>");
+        pricesRange.append("average Price: $" + results[i].stats.average_price, "<br>");
+        pricesRange.append("highest Price: $" + results[i].stats.highest_price);
+        ourDiv.append(pricesRange);
+      }
+
 
 
       // getting the ticket url and appending it to the results as an embeded link in a text
@@ -161,7 +173,7 @@ $("#submit-direction").on("click", function () {
 
     // looping over the array and getting information
     for (var i = 0; i <= maneuversDir.length - 1; i++) {
-     
+
       if (i == maneuversDir.length - 1) {
         var narrativeDirection = $("<li>");
         var narrativeDistance = maneuversDir[i].distance;
@@ -173,7 +185,7 @@ $("#submit-direction").on("click", function () {
         var narrativeDistance = maneuversDir[i].distance;
         // Appending our directions to the results (on webpage)
         narrativeDirection.append(maneuversDir[i].narrative + " for: " + narrativeDistance + " Miles. " + "<hr>");
-        
+
         $("#direction-result").append(narrativeDirection);
 
       }
@@ -187,6 +199,14 @@ $("#submit-direction").on("click", function () {
 // -----------------------------------------------------------
 // DatePicker
 $(".datepicker").pickadate();
+// ------------------------------------------------------------
+
+// -----------------------------------------------------------
+// DatePicker
+$("#time").pickatime({
+  formatSubmit: 'HH:H',
+  hiddenName: true
+});
 // ------------------------------------------------------------
 
 
@@ -204,6 +224,35 @@ firebase.initializeApp(config);
 // Create a variable to reference the database
 var database = firebase.database();
 
+$("#submit-direction").on("click", function (event) {
+  event.preventDefault();
+
+  // Grabs user input
+  var currentLocationFirebase = $("#current-location").val().trim();
+  var destinationFirebase = $("#destination").val().trim();
+
+  // Creates local temp object
+
+  var userLocationInput = {
+    currentLocation: currentLocationFirebase,
+    destination: destinationFirebase
+  };
+
+  // pushing the locations entered as an /locations 
+  database.ref("/locations").push(userLocationInput);
+
+  $("#current-location").val("");
+  $("#destination").val("");
+});
+
+database.ref("/locations").on("child_added", function (locSnapshot) {
+
+  var currentLocationFirebase = locSnapshot.val().currentLocation;
+  var destinationFirebase = locSnapshot.val().destination;
+}, function (errorObject) {
+  console.log("Errors handled: " + errorObject.code);
+});
+
 // Initial Values
 //var locFirebase = "";
 //var artistFirebase = "";
@@ -217,22 +266,17 @@ $("#submit").on("click", function (event) {
   var whenFirebase = $("#when").val().trim();
   var performersFirebase = $("#performers").val().trim();
   var keywordsFirebase = $("#keywords").val().trim();
-  var currentLocationFirebase = $("#current-location").val().trim();
-  var destinationFirebase = $("#destination").val().trim();
 
   // Creates local temp object
-
   var userInput = {
     artist: performersFirebase,
     where: whereFirebase,
     when: whenFirebase,
     keywords: keywordsFirebase,
-    currentLocation: currentLocationFirebase,
-    destination: destinationFirebase
   };
 
-  //Uploads to database
-  database.ref().push(userInput);
+  //Uploads to database as under /events
+  database.ref("/events").push(userInput);
 
   // console.log(userInput.artist);
   // console.log(userInput.where);
@@ -244,13 +288,11 @@ $("#submit").on("click", function (event) {
   $("#when").val("");
   $("#performers").val("");
   $("#keywords").val("");
-  $("#current-location").val("");
-  $("#destination").val();
 });
 
 //Firebase watcher + initial loader
 
-database.ref().on("child_added", function (childSnapshot) {
+database.ref("/events").on("child_added", function (childSnapshot) {
   //console.log(childSnapshot.val().locFirebase);
   // console.log(childSnapshot.val());
 
@@ -260,9 +302,6 @@ database.ref().on("child_added", function (childSnapshot) {
   var whenFirebase = childSnapshot.val().when;
   var performersFirebase = childSnapshot.val().artist;
   var keywordsFirebase = childSnapshot.val().keywords;
-  var currentLocationFirebase = childSnapshot.val().currentLocation;
-  var destinationFirebase = childSnapshot.val().destination;
-
   // console.log(whereFirebase);
   // console.log(whenFirebase);
   // console.log(performersFirebase);
