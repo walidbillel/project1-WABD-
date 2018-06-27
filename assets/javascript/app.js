@@ -5,6 +5,11 @@
 // Event Handler for the first API that pulls the events when clicking the submit button
 $("#submit").on("click", function () {
 
+  
+
+  $("input").addClass("animated jackInTheBox").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+    $(this).removeClass("animated jackInTheBox");
+  });
   // show the results divs when clicking on the sumbit buttons
   // $(".resultShow").show();
   // $(".directionShow").show();
@@ -36,13 +41,15 @@ $("#submit").on("click", function () {
   datePicked = moment(datePicked).format("YYYY[-]MM[-]DD");
   console.log(datePicked);
 
-  var timePicker = $("#time").val();
-  // timePicker = moment(timePicker).format("");
-  timePicker = moment(timePicker, "h:mm A").format("HH:mm");
-  console.log(timePicker);
+
+   // Creating a variable that holds the timepicked and get the value entered for the ajax call
+  var timePicked = $("#time").val();
+  timePicked = moment(timePicked, "h:mm A").format("HH:mm");
+  console.log(timePicked);
+
 
   // Creating the callback queryURL based on the parameters eneterd
-  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_local=" + datePicked + "T" + timePicker +"&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42&per_page=25";
+  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_local=" + datePicked + "T" + timePicked +"&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42&per_page=500";
 
 
   // Creating the Ajax call for the first API (seatgeek)
@@ -103,7 +110,7 @@ $("#submit").on("click", function () {
       // getting the prices and appending them to the results
       var pricesRange = $("<h6>");
       if (results[i].stats.lowest_price == null && results[i].stats.average_price == null , results[i].stats.lowest_price === null ) {
-        ourDiv.append(" <b> Prices are not available! Go to the link below to check availabilities </b>", "<hr>");
+        ourDiv.append(" <b> Prices are unavailable! </b>", "<hr>");
       } else {
         pricesRange.append("Lowest Price: $" + results[i].stats.lowest_price, "<br>");
         pricesRange.append("average Price: $" + results[i].stats.average_price, "<br>");
@@ -116,6 +123,9 @@ $("#submit").on("click", function () {
       // getting the ticket url and appending it to the results as an embeded link in a text
       var ticketUrl = $("<p>");
       ticketUrl.append("<a href=" + "'" + results[i].url + "'" + ">" + "<b> Get Your Ticket Now! </b>" + "</a>", "<hr>");
+      // ticketUrl.addClass("animated");
+      // ticketUrl.addClass("bounce");
+      
       ourDiv.append(ticketUrl);
 
       // showing our results on the page
@@ -206,10 +216,7 @@ $(".datepicker").pickadate();
 
 // -----------------------------------------------------------
 // DatePicker
-$("#time").pickatime({
-  formatSubmit: 'HH:H',
-  hiddenName: true
-});
+$("#time").pickatime();
 // ------------------------------------------------------------
 
 

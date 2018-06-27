@@ -38,7 +38,10 @@ body{
     padding-top:50px;
     font-family: 'Shrikhand', cursive;
     color: #FF0AC2
+      
 }
+
+
 
 /* Results Div*/
 #results{
@@ -72,6 +75,7 @@ footer{
     height: 40px;
     outline: none;
     color: #fff;
+
   
     border: none;
     border-radius: 15px;
@@ -91,4 +95,11 @@ footer{
       color: red;
   }
 
- 
+  .display-1 {
+    -webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+
+  }
+
