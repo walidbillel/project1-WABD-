@@ -33,13 +33,16 @@ $("#submit").on("click", function () {
 
   // Creating a variable that holds the datetime and get the value entered for the ajax call
   var datePicked = $("#when").val();
-  datePicked = (moment(datePicked).format("YYYY[-]MM[-]DD"));
+  datePicked = moment(datePicked).format("YYYY[-]MM[-]DD");
+  console.log(datePicked);
 
   var timePicker = $("#time").val();
+  // timePicker = moment(timePicker).format("");
+  timePicker = moment(timePicker, "h:mm A").format("HH:mm");
   console.log(timePicker);
 
   // Creating the callback queryURL based on the parameters eneterd
-  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_local=" + datePicked + "T19:00:00&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42&per_page=25";
+  var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&datetime_local=" + datePicked + "T" + timePicker +"&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42&per_page=25";
 
 
   // Creating the Ajax call for the first API (seatgeek)
