@@ -18,6 +18,7 @@ $("#submit").on("click", function () {
   var artistAjax = $("#performers").val();
   // Replacing spaces with dashes so the callback works proprely
   artistAjax = artistAjax.split(" ").join("-");
+  // changing it to lower case
   artistAjax = artistAjax.toLowerCase();
 
   // Creating a variable that holds the city and then get the value entered
@@ -77,9 +78,9 @@ $("#submit").on("click", function () {
 
       // getting the image from the call and appending it to the results
       var image = $("<img>");
-      // console.log(results[i].performers[0].image);
+      // putting the src of the image as an attribute so it shows into the webpage
       image.attr("src", results[i].performers[0].image);
-      // console.log(image);
+      //appending the image to the div 
       ourDiv.append(image);
 
 
@@ -87,7 +88,6 @@ $("#submit").on("click", function () {
       var dateAndTime = $("<p>");
       // getting the date and time with the ajax format
       var timeDefault = results[i].datetime_local;
-      // console.log(timeDefault);
       // using moment js to change the format to LLLL
       var timeFixed = moment(timeDefault).format("LLLL");
       // console.log(timeFixed);
@@ -115,7 +115,6 @@ $("#submit").on("click", function () {
       $(document).on("click", ".address", function(){
         // Getting the value from the attribute we gave above
         var dest = $(this).attr("address");
-        // console.log(dest);
         // putting the value in the destination box
         $("#destination").val(dest);
         // Using animate css to do some fun stuff when the address is clicked
@@ -130,7 +129,7 @@ $("#submit").on("click", function () {
       var pricesRange = $("<h6>");
       // if the prices are not available print out what's below
       if (results[i].stats.lowest_price == null && results[i].stats.average_price == null, results[i].stats.lowest_price === null) {
-        ourDiv.append(" <b> Prices are unavailable! Check the link below for more information.</b>","<br><br><br><br>");
+        ourDiv.append(" <b> Prices are unavailable! Click the button below for more information.</b>","<br><br><br><br>");
         // else (if prices are available print them out)
       } else {
         pricesRange.append("Lowest Price: $" + results[i].stats.lowest_price, "<br>");
@@ -143,7 +142,7 @@ $("#submit").on("click", function () {
 
       // getting the ticket url and appending it to the results as an embeded link in a button
       var ticketUrl = $("<button>");
-      ticketUrl.addClass("btn btn-");
+      ticketUrl.addClass("btn");
       ticketUrl.attr("id", "ticket")
       ticketUrl.css("position", "relative");
       ticketUrl.css("bottom", "2px");
@@ -164,6 +163,7 @@ $("#submit").on("click", function () {
 // Event Handler for the second API that pulls the directions when clicking the submit button
 $("#submit-direction").on("click", function () {
 
+    
   // using the Animate lib to do some fun stuff
   $(".directionAnime").addClass("animated zoomOutDown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
     $(this).removeClass("animated zoomOutDown");
@@ -207,7 +207,7 @@ $("#submit-direction").on("click", function () {
 
     // creating a variable that holds maneuvers and getting the data from the ajax call
     var maneuversDir = results.legs[0].maneuvers;
-    // console.log(maneuversDir);
+   
 
     // looping over the array and getting information
     for (var i = 0; i <= maneuversDir.length - 1; i++) {
@@ -297,10 +297,6 @@ $("#submit").on("click", function (event) {
   //Uploads to database as under /events
   database.ref("/events").push(userInput);
 
-  // console.log(userInput.artist);
-  // console.log(userInput.where);
-  // console.log(userInput.when);
-  // console.log(userInput.keywords);
 
   // Clears all of the text-boxes
   $("#where").val("");
@@ -319,10 +315,6 @@ database.ref("/events").on("child_added", function (childSnapshot) {
   var whereFirebase = childSnapshot.val().where;
   var performersFirebase = childSnapshot.val().artist;
   var keywordsFirebase = childSnapshot.val().keywords;
-  // console.log(whereFirebase);
-  // console.log(whenFirebase);
-  // console.log(performersFirebase);
-  // console.log(keywordsFirebase);
 
   // Handle the errors
 }, function (errorObject) {

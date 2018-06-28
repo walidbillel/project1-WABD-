@@ -54,6 +54,7 @@ body{
     height: 382px;
 }
 
+/* styling the direction result */
 #direction-result {
     overflow: auto;
     height: 139px;
@@ -72,6 +73,7 @@ footer{
     width:100%;
 }
 
+/* styling our buttons */
 .btn {
     padding: 5px 5px;
     font-size: 15px;
@@ -81,30 +83,30 @@ footer{
     height: 40px;
     outline: none;
     color: #fff;
-
-  
     border: none;
     border-radius: 15px;
     box-shadow: 0 5px #999;
   }
   
+  /* button hover */
   .btn:hover {background-color: #3e8e41}
   
+  /* btn active */
   .btn:active {
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
 
+  /* styling the color of the button's link in our event result */
   a {
       color:white;
   }
 
 
-  #required {
-      color: red;
-  }
 
+
+/* animate for the title HAPPENIN' */
   .display-1 {
     -webkit-animation-duration: 2s;
     -moz-animation-duration: 2s;
@@ -113,11 +115,14 @@ footer{
 
   }
 
+  /* putting underline on the result's address */
 .address {
     text-decoration: underline;
 }
 
+/* address hovers */
 .address:hover {
     color: blue;
     cursor: pointer;
 }
+
