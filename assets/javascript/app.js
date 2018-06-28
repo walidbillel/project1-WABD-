@@ -57,7 +57,7 @@ $("#submit").on("click", function () {
       // creating a div that holds the results
       var ourDiv = $("<div>");
 
-      // Getting the title from the ajax call then append it to the results
+      // Getting the title from the ajax call then append it to the results with some css touches
       var title = $("<p>");
       title.append("<b> Event Name: </b>" + results[i].title);
       title.css("font-family", "Roboto, sans-serif");
@@ -85,13 +85,17 @@ $("#submit").on("click", function () {
 
       // getting the date and time from the call and appending it to the results
       var dateAndTime = $("<p>");
+      // getting the date and time with the ajax format
       var timeDefault = results[i].datetime_local;
       // console.log(timeDefault);
+      // using moment js to change the format to LLLL
       var timeFixed = moment(timeDefault).format("LLLL");
       // console.log(timeFixed);
+      // appending the timefixed to our results
       dateAndTime.append("<hr>", "<b> Date & Time: </b>" + timeFixed);
+      // appending to our div
       ourDiv.append(dateAndTime);
-      // console.log(moment().format('LLLL'));
+      
 
 
       // getting the venue name and appending it to the results
@@ -99,22 +103,35 @@ $("#submit").on("click", function () {
       venueName.append("<b>Venue Name: </b>" + results[i].venue.name);
       ourDiv.append(venueName);
 
+      // creating a p tag that will hold the address
       var venueAddress = $("<p>");
+      // appending the address with the results from the ajax call
       venueAddress.append("<b>Venue Address: </b>" + results[i].venue.address + ", " + results[i].venue.extended_address);
+      // giving it an attribute of address so we can print it laster
       venueAddress.attr("address", results[i].venue.address + ", " + results[i].venue.extended_address);
+      // adding a class to use for the event handler down below
       venueAddress.addClass("address");
+      // event handler that execute the function below when the address is clicked
       $(document).on("click", ".address", function(){
+        // Getting the value from the attribute we gave above
         var dest = $(this).attr("address");
-        console.log(dest);
+        // console.log(dest);
+        // putting the value in the destination box
         $("#destination").val(dest);
+        // Using animate css to do some fun stuff when the address is clicked
+        $(".address").addClass("animated rollOut").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+          $(this).removeClass("animated rollOut");
+        });
       });
-
+      // appending our address to the div
       ourDiv.append(venueAddress);
 
       // getting the prices and appending them to the results
       var pricesRange = $("<h6>");
+      // if the prices are not available print out what's below
       if (results[i].stats.lowest_price == null && results[i].stats.average_price == null, results[i].stats.lowest_price === null) {
         ourDiv.append(" <b> Prices are unavailable! Check the link below for more information.</b>","<br><br><br><br>");
+        // else (if prices are available print them out)
       } else {
         pricesRange.append("Lowest Price: $" + results[i].stats.lowest_price, "<br>");
         pricesRange.append("average Price: $" + results[i].stats.average_price, "<br>");
@@ -124,7 +141,7 @@ $("#submit").on("click", function () {
 
 
 
-      // getting the ticket url and appending it to the results as an embeded link in a text
+      // getting the ticket url and appending it to the results as an embeded link in a button
       var ticketUrl = $("<button>");
       ticketUrl.addClass("btn btn-");
       ticketUrl.attr("id", "ticket")
@@ -238,7 +255,7 @@ $("#submit-direction").on("click", function (event) {
 
   // Creates local temp object
   var userLocationInput = {
-    currentLocation: currentLocationFirebase,
+    startingLocation: currentLocationFirebase,
     destination: destinationFirebase
   };
 
