@@ -34,19 +34,7 @@ $("#submit").on("click", function () {
   keywordAjax = keywordAjax.split(" ").join("-");
   keywordAjax = keywordAjax.toLowerCase();
 
-
-  // Creating a variable that holds the datetime and get the value entered for the ajax call
-  // var datePicked = $("#when").val();
-  // datePicked = moment(datePicked).format("YYYY[-]MM[-]DD");
-  // // console.log(datePicked);
-
-
-  // // Creating a variable that holds the timepicked and get the value entered for the ajax call
-  // var timePicked = $("#time").val();
-  // timePicked = moment(timePicked, "h:mm A").format("HH:mm");
-  // // console.log(timePicked);
-
-
+  
   // Creating the callback queryURL based on the parameters eneterd
   var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42&per_page=1000";
 
@@ -72,9 +60,13 @@ $("#submit").on("click", function () {
       // Getting the title from the ajax call then append it to the results
       var title = $("<p>");
       title.append("<b> Event Name: </b>" + results[i].title);
-      title.css("background-color", "blue");
+      title.css("font-family", "Roboto, sans-serif");
       title.css("padding", "15px");
+      title.css("font-size", "16px");
+      title.css("background-color", "#0080FF");
+      title.css("border-radius", "25px");
       title.css("color", "white");
+      title.css("text-align", "center");
 
       ourDiv.append(title, "<hr>");
 
@@ -93,8 +85,13 @@ $("#submit").on("click", function () {
 
       // getting the date and time from the call and appending it to the results
       var dateAndTime = $("<p>");
-      dateAndTime.append("<hr>", "<b>Date & Time: </b>" + results[i].datetime_local);
+      var timeDefault = results[i].datetime_local;
+      // console.log(timeDefault);
+      var timeFixed = moment(timeDefault).format("LLLL");
+      // console.log(timeFixed);
+      dateAndTime.append("<hr>", "<b> Date & Time: </b>" + timeFixed);
       ourDiv.append(dateAndTime);
+      // console.log(moment().format('LLLL'));
 
 
       // getting the venue name and appending it to the results
@@ -104,12 +101,20 @@ $("#submit").on("click", function () {
 
       var venueAddress = $("<p>");
       venueAddress.append("<b>Venue Address: </b>" + results[i].venue.address + ", " + results[i].venue.extended_address);
+      venueAddress.attr("address", results[i].venue.address + ", " + results[i].venue.extended_address);
+      venueAddress.addClass("address");
+      $(document).on("click", ".address", function(){
+        var dest = $(this).attr("address");
+        console.log(dest);
+        $("#destination").val(dest);
+      });
+
       ourDiv.append(venueAddress);
 
       // getting the prices and appending them to the results
       var pricesRange = $("<h6>");
       if (results[i].stats.lowest_price == null && results[i].stats.average_price == null, results[i].stats.lowest_price === null) {
-        ourDiv.append(" <b> Prices are unavailable! Check the link below for more information.</b>", "<hr>");
+        ourDiv.append(" <b> Prices are unavailable! Check the link below for more information.</b>","<br><br><br><br>");
       } else {
         pricesRange.append("Lowest Price: $" + results[i].stats.lowest_price, "<br>");
         pricesRange.append("average Price: $" + results[i].stats.average_price, "<br>");
@@ -120,15 +125,23 @@ $("#submit").on("click", function () {
 
 
       // getting the ticket url and appending it to the results as an embeded link in a text
-      var ticketUrl = $("<p>");
-      ticketUrl.append("<a href=" + "'" + results[i].url + "'" + ">" + "<b> Get Your Ticket Now! </b>" + "</a>", "<hr>");
-      ourDiv.append(ticketUrl);
+      var ticketUrl = $("<button>");
+      ticketUrl.addClass("btn btn-");
+      ticketUrl.attr("id", "ticket")
+      ticketUrl.css("position", "relative");
+      ticketUrl.css("bottom", "2px");
+      ticketUrl.append("<a href=" + "'" + results[i].url + "'" + ">" + "<b> Buy Tickets! </b>" + "</a>");
+      ourDiv.append(ticketUrl,  "<hr>");
 
       // showing our results on the page
       $("#results").append(ourDiv);
     }
   });
 });
+
+
+
+
 
 
 // Event Handler for the second API that pulls the directions when clicking the submit button
@@ -201,16 +214,6 @@ $("#submit-direction").on("click", function () {
 });
 
 
-// -----------------------------------------------------------
-// DatePicker
-$(".datepicker").pickadate();
-// ------------------------------------------------------------
-
-// -----------------------------------------------------------
-// DatePicker
-$("#time").pickatime();
-// ------------------------------------------------------------
-
 
 // Initialize Firebase
 var config = {
@@ -264,7 +267,6 @@ $("#submit").on("click", function (event) {
 
   // Grabs user input
   var whereFirebase = $("#where").val().trim();
-  var whenFirebase = $("#when").val().trim();
   var performersFirebase = $("#performers").val().trim();
   var keywordsFirebase = $("#keywords").val().trim();
 
@@ -272,7 +274,6 @@ $("#submit").on("click", function (event) {
   var userInput = {
     artist: performersFirebase,
     where: whereFirebase,
-    when: whenFirebase,
     keywords: keywordsFirebase,
   };
 
@@ -286,7 +287,6 @@ $("#submit").on("click", function (event) {
 
   // Clears all of the text-boxes
   $("#where").val("");
-  $("#when").val("");
   $("#performers").val("");
   $("#keywords").val("");
 });
@@ -300,7 +300,6 @@ database.ref("/events").on("child_added", function (childSnapshot) {
   // Store everything into a variable
 
   var whereFirebase = childSnapshot.val().where;
-  var whenFirebase = childSnapshot.val().when;
   var performersFirebase = childSnapshot.val().artist;
   var keywordsFirebase = childSnapshot.val().keywords;
   // console.log(whereFirebase);

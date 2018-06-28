@@ -41,6 +41,11 @@ body{
       
 }
 
+#ticket {
+    color: white;
+    background-color: rgb(21, 219, 21);
+}
+
 
 
 /* Results Div*/
@@ -57,6 +62,7 @@ body{
 /*Card Color*/
 #cardColor{
     background:#e7d2ac;
+    height:  439px;
 }
   /*Footer*/
 footer{
@@ -90,6 +96,10 @@ footer{
     transform: translateY(4px);
   }
 
+  a {
+      color:white;
+  }
+
 
   #required {
       color: red;
@@ -103,3 +113,11 @@ footer{
 
   }
 
+.address {
+    text-decoration: underline;
+}
+
+.address:hover {
+    color: blue;
+    cursor: pointer;
+}
