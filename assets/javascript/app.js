@@ -1,8 +1,8 @@
 
+// ------------------------------------SEATGEEK API COMPOSITION------------------------------------------------
 
 
-
-// Event Handler for the first API that pulls the events when clicking the submit button
+// Event Handler for the API that pulls the events when clicking the submit button
 $("#submit").on("click", function () {
 
 
@@ -35,7 +35,7 @@ $("#submit").on("click", function () {
   keywordAjax = keywordAjax.split(" ").join("-");
   keywordAjax = keywordAjax.toLowerCase();
 
-  
+
   // Creating the callback queryURL based on the parameters eneterd
   var queryURL = "https://api.seatgeek.com/2/events?performers.slug=" + artistAjax + "&q=" + keywordAjax + "&venue.city=" + cityAjax + "&client_id=MTIwMDM0Mjl8MTUyOTUzNDYwOS42&per_page=1000";
 
@@ -95,7 +95,7 @@ $("#submit").on("click", function () {
       dateAndTime.append("<hr>", "<b> Date & Time: </b>" + timeFixed);
       // appending to our div
       ourDiv.append(dateAndTime);
-      
+
 
 
       // getting the venue name and appending it to the results
@@ -112,7 +112,7 @@ $("#submit").on("click", function () {
       // adding a class to use for the event handler down below
       venueAddress.addClass("address");
       // event handler that execute the function below when the address is clicked
-      $(document).on("click", ".address", function(){
+      $(document).on("click", ".address", function () {
         // Getting the value from the attribute we gave above
         var dest = $(this).attr("address");
         // putting the value in the destination box
@@ -129,8 +129,8 @@ $("#submit").on("click", function () {
       var pricesRange = $("<h6>");
       // if the prices are not available print out what's below
       if (results[i].stats.lowest_price == null && results[i].stats.average_price == null, results[i].stats.lowest_price === null) {
-        ourDiv.append(" <b> Prices are unavailable! Click the button below for more information.</b>","<br><br><br><br>");
-        // else (if prices are available print them out)
+        ourDiv.append(" <b> Prices are unavailable! Click the button below for more information.</b>", "<br><br><br><br>");
+        // else (if prices are available print them out and append them to the div)
       } else {
         pricesRange.append("Lowest Price: $" + results[i].stats.lowest_price, "<br>");
         pricesRange.append("average Price: $" + results[i].stats.average_price, "<br>");
@@ -147,7 +147,7 @@ $("#submit").on("click", function () {
       ticketUrl.css("position", "relative");
       ticketUrl.css("bottom", "2px");
       ticketUrl.append("<a href=" + "'" + results[i].url + "'" + ">" + "<b> Buy Tickets! </b>" + "</a>");
-      ourDiv.append(ticketUrl,  "<hr>");
+      ourDiv.append(ticketUrl, "<hr>");
 
       // showing our results on the page
       $("#results").append(ourDiv);
@@ -156,14 +156,13 @@ $("#submit").on("click", function () {
 });
 
 
+// -----------------------------------MAPQUEST API COMPOSITION----------------------------------------
 
 
-
-
-// Event Handler for the second API that pulls the directions when clicking the submit button
+// Event Handler for the API that pulls the directions when clicking the submit button
 $("#submit-direction").on("click", function () {
 
-    
+
   // using the Animate lib to do some fun stuff
   $(".directionAnime").addClass("animated zoomOutDown").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
     $(this).removeClass("animated zoomOutDown");
@@ -175,7 +174,7 @@ $("#submit-direction").on("click", function () {
   var currentLocaAjax2 = $("#current-location").val();
   // replacing spaces with "+" so the ajax call works proprely
   currentLocaAjax2 = currentLocaAjax2.split(" ").join("+");
- 
+
   // creating a variable that holds the destination then getting the value enetered
   var destinationAjax2 = $("#destination").val();
   destinationAjax2 = destinationAjax2.split(" ").join("+");
@@ -207,7 +206,7 @@ $("#submit-direction").on("click", function () {
 
     // creating a variable that holds maneuvers and getting the data from the ajax call
     var maneuversDir = results.legs[0].maneuvers;
-   
+
 
     // looping over the array and getting information
     for (var i = 0; i <= maneuversDir.length - 1; i++) {
@@ -231,6 +230,7 @@ $("#submit-direction").on("click", function () {
 });
 
 
+// -----------------------------------FIREBASE-------------------------------------------
 
 // Initialize Firebase
 var config = {
