@@ -182,7 +182,7 @@ $("#submit-direction").on("click", function () {
 
 
   //  Creating the second callback queryURL from mapquest based on the parameters eneterd
-  queryURL = "http://www.mapquestapi.com/directions/v2/route?key=DZcQ6A8PzsQFGMHAqxissAvWHreJTluG&from=" + currentLocaAjax2 + "&to=" + destinationAjax2 + "&enhancedNarrative=true"
+  queryURL = "https://www.mapquestapi.com/directions/v2/route?key=DZcQ6A8PzsQFGMHAqxissAvWHreJTluG&from=" + currentLocaAjax2 + "&to=" + destinationAjax2 + "&enhancedNarrative=true"
 
   $.ajax({
     url: queryURL,
